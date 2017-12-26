@@ -14,7 +14,7 @@ const vendors = [
   'moment',
   'codemirror/lib/codemirror.js',
   'codemirror/mode/clike/clike.js',
-  'codemirror/mode/python/python.js'
+  'codemirror/mode/python/python.js',
 ];
 
 module.exports = {
@@ -23,8 +23,8 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, '../static/js'),
-    filename: '[name].dll.js',
-    library: '[name]_dll',
+    filename: '[name].dll.[hash:7].js',
+    library: '[name]_[hash]_dll',
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -40,7 +40,7 @@ module.exports = {
     new webpack.DllPlugin({
       context: __dirname,
       path: path.join(__dirname, '[name]-manifest.json'),
-      name: '[name]_dll',
+      name: '[name]_[hash]_dll',
     })
   ]
 };
