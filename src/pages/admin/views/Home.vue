@@ -1,12 +1,12 @@
 <template>
   <div class="container">
     <div>
-      <SideMenu :user="profile.user"></SideMenu>
+      <SideMenu></SideMenu>
     </div>
     <div id="header">
       <screen-full :width="14" :height="14" class="screen-full"></screen-full>
       <el-dropdown @command="handleCommand">
-        <span>{{profile.user.username}}<i class="el-icon-caret-bottom el-icon--right"></i></span>
+        <span>{{user.username}}<i class="el-icon-caret-bottom el-icon--right"></i></span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="logout">Logout</el-dropdown-item>
         </el-dropdown-menu>
@@ -24,6 +24,8 @@
 </template>
 
 <script>
+  import { types } from '@/store'
+  import { mapGetters } from 'vuex'
   import SideMenu from '../components/SideMenu.vue'
   import ScreenFull from '@admin/components/ScreenFull.vue'
   import api from '../api'
@@ -32,10 +34,7 @@
     name: 'app',
     data () {
       return {
-        version: process.env.VERSION,
-        profile: {
-          user: {}
-        }
+        version: process.env.VERSION
       }
     },
     components: {
@@ -49,7 +48,7 @@
           next({name: 'login'})
         } else {
           next(vm => {
-            vm.profile = res.data.data
+            vm.$store.commit(types.CHANGE_PROFILE, {profile: res.data.data})
           })
         }
       })
@@ -62,6 +61,9 @@
           })
         }
       }
+    },
+    computed: {
+      ...mapGetters(['user'])
     }
   }
 </script>
@@ -86,6 +88,7 @@
     -webkit-font-smoothing: antialiased;
     background-color: #EDECEC;
     overflow-y: scroll;
+    min-width: 1000px;
   }
 
   * {
@@ -127,8 +130,11 @@
       transform: none;
     }
   }
+
   .fadeInUp-enter-active {
     animation: fadeInUp .8s;
   }
+
+
 
 </style>
