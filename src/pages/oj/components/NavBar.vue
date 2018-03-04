@@ -59,7 +59,8 @@
       </template>
       <template v-else>
         <Dropdown class="drop-menu" @on-click="handleRoute" placement="bottom" trigger="click">
-          <Button type="text" class="drop-menu-title">{{ user.username }}
+          <Button type="text" class="drop-menu-title">	
+	    {{ user.username }}
             <Icon type="arrow-down-b"></Icon>
           </Button>
           <Dropdown-menu slot="list">
@@ -70,6 +71,9 @@
             <Dropdown-item divided name="/logout">Logout</Dropdown-item>
           </Dropdown-menu>
         </Dropdown>
+	<div class="avatar-container">
+           <img class="avatar" :src="profile.avatar"/>
+        </div>
       </template>
     </Menu>
     <Modal v-model="modalVisible" :width="400">
@@ -110,7 +114,7 @@
       }
     },
     computed: {
-      ...mapGetters(['website', 'modalStatus', 'user', 'isAuthenticated', 'isAdminRole']),
+      ...mapGetters(['website', 'modalStatus', 'user', 'isAuthenticated', 'isAdminRole', 'profile']),
       // 跟随路由变化
       activeMenu () {
         return '/' + this.$route.path.split('/')[1]
@@ -170,4 +174,19 @@
       font-weight: 600;
     }
   }
+
+  .avatar-container {
+      display:inline;
+      position:absolute;
+      right:-3px;
+      top:12px;
+      transform: translate(-50%);
+      z-index: 1;
+      .avatar {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        box-shadow: 0 1px 1px 0;
+      }
+    }
 </style>
