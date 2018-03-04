@@ -60,7 +60,7 @@
       <template v-else>
         <Dropdown class="drop-menu" @on-click="handleRoute" placement="bottom" trigger="click">
           <Button type="text" class="drop-menu-title">	
-	    <Tooltip v-bind:content="'signed in as ' + user.username" placement="left-start">
+	    <Tooltip v-bind:content="'Signed in as ' + user.username" placement="left-start">
 	    	<div class="avatar-container">
                     <img class="avatar" :src="profile.avatar"/>
             	</div>
