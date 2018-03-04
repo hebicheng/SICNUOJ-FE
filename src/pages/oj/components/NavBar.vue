@@ -60,8 +60,12 @@
       <template v-else>
         <Dropdown class="drop-menu" @on-click="handleRoute" placement="bottom" trigger="click">
           <Button type="text" class="drop-menu-title">	
-	    {{ user.username }}
-            <Icon type="arrow-down-b"></Icon>
+	    <Tooltip v-bind:content="'signed in as ' + user.username" placement="left-start">
+	    	<div class="avatar-container">
+                    <img class="avatar" :src="profile.avatar"/>
+            	</div>
+	    </Tooltip>	
+	    <Icon type="navicon"></Icon>
           </Button>
           <Dropdown-menu slot="list">
             <Dropdown-item name="/user-home">Home</Dropdown-item>
@@ -71,9 +75,6 @@
             <Dropdown-item divided name="/logout">Logout</Dropdown-item>
           </Dropdown-menu>
         </Dropdown>
-	<div class="avatar-container">
-           <img class="avatar" :src="profile.avatar"/>
-        </div>
       </template>
     </Menu>
     <Modal v-model="modalVisible" :width="400">
@@ -177,9 +178,7 @@
 
   .avatar-container {
       display:inline;
-      position:absolute;
-      right:-3px;
-      top:12px;
+      left:50%;
       transform: translate(-50%);
       z-index: 1;
       .avatar {
