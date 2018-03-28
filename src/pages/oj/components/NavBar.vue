@@ -53,7 +53,7 @@
                   type="ghost"
                   shape="circle"
                   @click="handleBtnClick('register')"
-                  style="margin-left: 5px;">Register
+                  style="">Register
           </Button>
         </div>
       </template>
