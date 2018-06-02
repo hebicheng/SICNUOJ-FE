@@ -6,14 +6,9 @@
         <router-view></router-view>
       </transition>
       <div class="footer">
-<<<<<<< HEAD
-        <p v-html="website.website_footer"></p>
-        <!-- <p>Powered by <a href="https://github.com/QingdaoU/OnlineJudge">OnlineJudge</a>
-=======
         <Button type="text" class="btn btn-success" @click="changeLocale()">简体中文 / English</Button>
         <p v-html="website.website_footer"></p>    
-        <p>Powered by <a href="https://github.com/QingdaoU/OnlineJudge">OnlineJudge</a>
->>>>>>> 7d646281727b8a121c923a7763c80a1489fc35a5
+        <!-- <p>Powered by <a href="https://github.com/QingdaoU/OnlineJudge">OnlineJudge</a>
           <span v-if="version">&nbsp; Version: {{ version }}</span>
         </p>-->
       </div>

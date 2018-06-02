@@ -53,11 +53,7 @@
                   type="ghost"
                   shape="circle"
                   @click="handleBtnClick('register')"
-<<<<<<< HEAD
-                  style="">Register
-=======
                   style="margin-left: 5px;">{{$t('m.Register')}}
->>>>>>> 7d646281727b8a121c923a7763c80a1489fc35a5
           </Button>
         </div>
       </template>
