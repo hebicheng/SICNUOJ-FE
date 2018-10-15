@@ -1,19 +1,24 @@
 <template>
   <div style="margin: 0px 0px 15px 0px">
     <Row type="flex" justify="space-between" class="header">
-      <Col :span=10>
+      <Col :span=12>
       <div>
         <span>Language:</span>
         <Select :value="language" @on-change="onLangChange" class="adjust">
           <Option v-for="item in languages" :key="item" :value="item">{{item}}
           </Option>
         </Select>
+
+        <Tooltip content="Reset to default code definition" placement="top" style="margin-left: 10px">
+          <Button icon="refresh" @click="onResetClick"></Button>
+        </Tooltip>
+
       </div>
       </Col>
-      <Col :span=10>
+      <Col :span=12>
       <div class="fl-right">
         <span>Theme:</span>
-        <Select v-model="options.theme" @on-change="onThemeChange" class="adjust">
+        <Select :value="theme" @on-change="onThemeChange" class="adjust">
           <Option v-for="item in themes" :key="item.label" :value="item.value">{{item.label}}
           </Option>
         </Select>
@@ -65,6 +70,10 @@
       language: {
         type: String,
         default: 'C++'
+      },
+      theme: {
+        type: String,
+        default: 'solarized'
       }
     },
     data () {
@@ -115,12 +124,21 @@
       },
       onThemeChange (newTheme) {
         this.editor.setOption('theme', newTheme)
+        this.$emit('changeTheme', newTheme)
+      },
+      onResetClick () {
+        this.$emit('resetCode')
       }
     },
     computed: {
       editor () {
         // get current editor object
         return this.$refs.myEditor.editor
+      }
+    },
+    watch: {
+      'theme' (newVal, oldVal) {
+        this.editor.setOption('theme', newVal)
       }
     }
   }

@@ -111,6 +111,7 @@
           },
           {
             title: 'Title',
+            width: 400,
             render: (h, params) => {
               return h('Button', {
                 props: {
@@ -123,7 +124,10 @@
                   }
                 },
                 style: {
-                  padding: '2px 0'
+                  padding: '2px 0',
+                  overflowX: 'auto',
+                  textAlign: 'left',
+                  width: '100%'
                 }
               }, params.row.title)
             }
@@ -236,7 +240,6 @@
             {
               title: 'Tags',
               align: 'center',
-              width: 200,
               render: (h, params) => {
                 let tags = []
                 params.row.tags.forEach(tag => {
