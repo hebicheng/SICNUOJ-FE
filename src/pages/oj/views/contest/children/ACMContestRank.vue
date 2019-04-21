@@ -23,7 +23,7 @@
             </p>
             <p>
               <span>Force Update</span>
-              <i-switch :disabled="refreshDisabled" v-model="forceUpdate"></i-switch>
+              <i-switch v-model="forceUpdate"></i-switch>
             </p>
           </template>
           <template>
