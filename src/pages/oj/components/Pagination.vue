@@ -1,6 +1,7 @@
 <template>
   <div class="page">
     <Page :total="total"
+          size="small"
           :page-size="pageSize"
           @on-change="onChange"
           @on-page-size-change="onPageSizeChange"

@@ -73,7 +73,8 @@ export const JUDGE_STATUS = {
 export const CONTEST_STATUS = {
   'NOT_START': '1',
   'UNDERWAY': '0',
-  'ENDED': '-1'
+  'ENDED': '-1',
+  'NOT_ENDED': '2'
 }
 
 export const CONTEST_STATUS_REVERSE = {

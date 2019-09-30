@@ -1,5 +1,5 @@
 <template>
-  <div id="header">
+<div id="header">
     <Menu theme="light" mode="horizontal" @on-select="handleRoute" :active-name="activeMenu" class="oj-menu">
       <div class="logo"><img src="/public/upload/logo.ico"  alt="Logo" height="59" width="59" style="vertical-align:middle" /><span>{{website.website_name}}</span></div>
       <Menu-item name="/">
@@ -82,7 +82,7 @@
       <component :is="modalStatus.mode" v-if="modalVisible"></component>
       <div slot="footer" style="display: none"></div>
     </Modal>
-  </div>
+</div>
 </template>
 
 <script>

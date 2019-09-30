@@ -9,6 +9,7 @@
         <CarouselItem v-for="(contest, index) of contests" :key="index">
           <div class="contest-content">
             <div class="contest-content-tags">
+	      <Tag type="dot" :color="CONTEST_STATUS_REVERSE[contest.status].color">{{CONTEST_STATUS_REVERSE[contest.status].name}}</Tag>
               <Button type="info" shape="circle" size="small" icon="calendar">
                 {{contest.start_time | localtime('YYYY-M-D HH:mm') }}
               </Button>
@@ -35,7 +36,7 @@
   import Announcements from './Announcements.vue'
   import api from '@oj/api'
   import time from '@/utils/time'
-  import { CONTEST_STATUS } from '@/utils/constants'
+  import { CONTEST_STATUS, CONTEST_STATUS_REVERSE } from '@/utils/constants'
 
   export default {
     name: 'home',
@@ -45,11 +46,12 @@
     data () {
       return {
         contests: [],
-        index: 0
+        index: 0,
+        CONTEST_STATUS_REVERSE: CONTEST_STATUS_REVERSE
       }
     },
     mounted () {
-      let params = {status: CONTEST_STATUS.NOT_START}
+      let params = {status: CONTEST_STATUS.NOT_ENDED}
       api.getContestList(0, 5, params).then(res => {
         this.contests = res.data.data.results
       })
