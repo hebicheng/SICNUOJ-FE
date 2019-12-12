@@ -28,6 +28,8 @@ export const m = {
   System_Error_Description: 'Judge 系統發生錯誤。請回報系統管理員。',
   // FAQ.vue
   Frequently_Asked_Questions: '常見問題',
+  // ContestList.vue
+  All: '全部',
   // ContestDetail.vue
   Problems: '題目',
   Announcements: '公告',
