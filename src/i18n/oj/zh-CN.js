@@ -252,6 +252,7 @@ export const m = {
   Partial_Accepted: '部分接受',
   Compile_Error: '编译失败',
   Rejudge: '重新评分',
+  Problem_Submissions: '提交信息',
   // UserHome.vue
   UserHomeSolved: '已解决数量',
   UserHomeserSubmissions: '提交次数',
