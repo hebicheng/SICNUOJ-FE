@@ -14,16 +14,12 @@
           </p>
           <p>
             <span>{{$t('m.Auto_Refresh')}}(10s)</span>
-            <i-switch :disabled="refreshDisabled" @on-change="handleAutoRefresh"></i-switch>
+            <i-switch @on-change="handleAutoRefresh"></i-switch>
           </p>
           <template v-if="isContestAdmin">
             <p>
-              <span>{{$t('m.RealName')}}</span>
-              <i-switch v-model="showRealName"></i-switch>
-            </p>
-            <p>
               <span>{{$t('m.Force_Update')}}</span>
-              <i-switch :disabled="refreshDisabled" v-model="forceUpdate"></i-switch>
+              <i-switch v-model="forceUpdate"></i-switch>
             </p>
           </template>
           <template>
