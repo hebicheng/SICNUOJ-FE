@@ -31,7 +31,7 @@
     <div v-show="showChart" class="echarts">
       <ECharts :options="options" ref="chart" auto-resize></ECharts>
     </div>
-    <Table ref="tableRank" :columns="columns" :data="dataRank" disabled-hover width="1600" height="750"></Table>
+    <Table ref="tableRank" :columns="columns" :data="dataRank" disabled-hover height="600"></Table>
     <Pagination :total="total"
                 :page-size.sync="limit"
                 :current.sync="page"
