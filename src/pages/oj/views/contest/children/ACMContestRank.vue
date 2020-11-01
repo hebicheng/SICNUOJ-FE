@@ -10,7 +10,7 @@
             <span>{{$t('m.Menu')}}</span>
             <i-switch v-model="showMenu"></i-switch>
             <span>{{$t('m.Chart')}}</span>
-            <i-switch v-model="showChart"></i-switch>
+            <i-switch v-model="showChart" :disabled="true"></i-switch>
           </p>
           <p>
             <span>{{$t('m.Auto_Refresh')}}(10s)</span>
@@ -29,9 +29,9 @@
       </Poptip>
     </div>
     <div v-show="showChart" class="echarts">
-      <ECharts :options="options" ref="chart" auto-resize></ECharts>
+      <ECharts :options="options" ref="chart" ></ECharts>
     </div>
-    <Table ref="tableRank" :columns="columns" :data="dataRank" disabled-hover height="600"></Table>
+    <Table ref="tableRank" :columns="columns" :data="dataRank" disabled-hover></Table>
     <Pagination :total="total"
                 :page-size.sync="limit"
                 :current.sync="page"
@@ -57,6 +57,7 @@
     mixins: [ContestRankMixin],
     data () {
       return {
+        showChart: false,
         total: 0,
         page: 1,
         contestID: '',

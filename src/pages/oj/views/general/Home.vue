@@ -80,6 +80,7 @@
       padding: 0 70px 40px 70px;
       &-description {
         margin-top: 25px;
+        height: 200px;
       }
     }
   }
