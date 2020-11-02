@@ -4,7 +4,7 @@
  * @Author: hebicheng
  * @Date: 2020-11-01 10:29:17
  * @LastEditors: hebicheng
- * @LastEditTime: 2020-11-02 15:42:53
+ * @LastEditTime: 2020-11-02 15:50:51
 -->
 <template>
   <Row type="flex" justify="space-around">
@@ -84,7 +84,7 @@
 </script>
 
 <style lang="less" scoped>
-  @import url("http://unpkg.com/element-ui@2.3.7/lib/theme-chalk/index.css");
+  @import url("https://unpkg.com/element-ui@2.3.7/lib/theme-chalk/index.css");
   .contest {
     &-title {
       font-style: italic;
