@@ -55,10 +55,10 @@
       <Button v-for="tag in tagList"
               :key="tag.name"
               @click="filterByTag(tag.name)"
-              type="ghost"
               :disabled="query.tag === tag.name"
               shape="circle"
-              class="tag-btn">{{tag.name}}
+              class="tag-btn"
+              type="dashed">{{tag.name}}
       </Button>
 
       <Button long id="pick-one" @click="pickone">

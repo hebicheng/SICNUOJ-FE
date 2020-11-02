@@ -114,7 +114,6 @@
             render: (h, {row}) => {
               return h('Button', {
                 props: {
-                  type: 'ghost',
                   size: 'small',
                   icon: 'checkmark',
                   disabled: row.checked

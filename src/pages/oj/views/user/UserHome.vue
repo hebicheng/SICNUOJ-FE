@@ -41,7 +41,7 @@
           <p v-else>{{$t('m.UserHomeIntro')}}</p>
           <div class="btns">
             <div class="problem-btn" v-for="problemID of problems" :key="problemID">
-              <Button type="ghost" @click="goProblem(problemID)">{{problemID}}</Button>
+              <Button @click="goProblem(problemID)">{{problemID}}</Button>
             </div>
           </div>
         </div>

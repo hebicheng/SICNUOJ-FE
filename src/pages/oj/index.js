@@ -1,3 +1,11 @@
+/*
+ * @Descripttion:
+ * @version:
+ * @Author: hebicheng
+ * @Date: 2020-11-01 10:29:17
+ * @LastEditors: hebicheng
+ * @LastEditTime: 2020-11-02 10:58:47
+ */
 import 'babel-polyfill'
 import Vue from 'vue'
 import App from './App.vue'
@@ -8,7 +16,7 @@ import VueClipboard from 'vue-clipboard2'
 import VueAnalytics from 'vue-analytics'
 import { GOOGLE_ANALYTICS_ID } from '@/utils/constants'
 
-import iView from 'iview'
+import iView from 'view-design'
 import 'iview/dist/styles/iview.css'
 
 import Panel from '@oj/components/Panel.vue'
@@ -32,6 +40,8 @@ import 'echarts/lib/component/tooltip'
 import 'echarts/lib/component/toolbox'
 import 'echarts/lib/component/markPoint'
 
+import ElementUI from 'element-ui'
+
 // register global utility filters.
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
@@ -45,6 +55,7 @@ Vue.use(iView, {
 Vue.use(VueClipboard)
 Vue.use(highlight)
 Vue.use(katex)
+Vue.use(ElementUI)
 Vue.use(VueAnalytics, {
   id: GOOGLE_ANALYTICS_ID,
   router
