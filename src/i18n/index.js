@@ -4,14 +4,14 @@
  * @Author: hebicheng
  * @Date: 2020-11-01 10:29:17
  * @LastEditors: hebicheng
- * @LastEditTime: 2020-11-01 11:11:03
+ * @LastEditTime: 2020-11-02 18:31:35
  */
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 // ivew UI
-import ivenUS from 'view-design/dist/locale/en-US'
-import ivzhCN from 'view-design/dist/locale/zh-CN'
-import ivzhTW from 'view-design/dist/locale/zh-TW'
+import ivenUS from 'iview/dist/locale/en-US'
+import ivzhCN from 'iview/dist/locale/zh-CN'
+import ivzhTW from 'iview/dist/locale/zh-TW'
 // element UI
 import elenUS from 'element-ui/lib/locale/lang/en'
 import elzhCN from 'element-ui/lib/locale/lang/zh-CN'
