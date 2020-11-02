@@ -4,7 +4,7 @@
  * @Author: hebicheng
  * @Date: 2020-11-01 10:29:17
  * @LastEditors: hebicheng
- * @LastEditTime: 2020-11-02 10:58:47
+ * @LastEditTime: 2020-11-02 18:42:27
  */
 import 'babel-polyfill'
 import Vue from 'vue'
@@ -16,7 +16,7 @@ import VueClipboard from 'vue-clipboard2'
 import VueAnalytics from 'vue-analytics'
 import { GOOGLE_ANALYTICS_ID } from '@/utils/constants'
 
-import iView from 'view-design'
+import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 
 import Panel from '@oj/components/Panel.vue'
@@ -68,6 +68,7 @@ Vue.component(Panel.name, Panel)
 
 // 注册全局消息提示
 Vue.prototype.$Message.config({
+  top: 50,
   duration: 2
 })
 Vue.prototype.$error = (s) => Vue.prototype.$Message.error(s)

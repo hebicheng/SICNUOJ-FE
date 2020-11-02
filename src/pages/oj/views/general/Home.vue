@@ -4,7 +4,7 @@
  * @Author: hebicheng
  * @Date: 2020-11-01 10:29:17
  * @LastEditors: hebicheng
- * @LastEditTime: 2020-11-02 15:50:51
+ * @LastEditTime: 2020-11-02 19:50:21
 -->
 <template>
   <Row type="flex" justify="space-around">
@@ -14,9 +14,9 @@
             <el-carousel-item v-for="(contest, index) of contests" :key="index" >       
               <div class="contest-content">
                 <h2 style="position: absolute; top:40px; left: 20px; text-align:center">
-                  <Button type="text"  class="contest-title" @click="goContest">{{contests[index].title}}
+                  <Button type="text"  class="contest-title" @click="goContest(index)">{{contests[index].title}}
                   </Button>
-                  <Button size="small" shape="circle" :type="contest.status === 1 ? 'warning' : 'success'" >{{CONTEST_STATUS_REVERSE[contest.status].name}}
+                  <Button size="small" shape="circle" :type="contest.status === '0' ? 'success' : 'warning'" >{{CONTEST_STATUS_REVERSE[contest.status].name}}
                   </Button>
                   <Button type="info" shape="circle" size="small" icon="calendar">
                     {{contest.start_time | localtime('YYYY-M-D HH:mm') }}
@@ -34,14 +34,21 @@
               </div>
             </el-carousel-item> 
           </div>
-          <el-carousel-item >
+          <el-carousel-item>
             <img src="/public/upload/home-banner-1.png" alt="">
+          </el-carousel-item>
+          <el-carousel-item v-if="getExtraImage('/public/upload/home-banner-2.png')">
+            <img src="/public/upload/home-banner-2.png" alt="">
+          </el-carousel-item>
+          <el-carousel-item v-if="getExtraImage('/public/upload/home-banner-3.png')">
+            <img src="/public/upload/home-banner-3.png" alt="">
           </el-carousel-item>
         </el-carousel>
       
     <Announcements class="announcement"></Announcements>
     </Col>
   </Row>
+  
 </template>
 
 <script>
@@ -49,6 +56,7 @@
   import api from '@oj/api'
   import time from '@/utils/time'
   import { CONTEST_STATUS, CONTEST_STATUS_REVERSE } from '@/utils/constants'
+  import axios from 'axios'
 
   export default {
     name: 'home',
@@ -73,10 +81,22 @@
       getDuration (startTime, endTime) {
         return time.duration(startTime, endTime)
       },
-      goContest () {
+      goContest (index) {
+        this.index = index
         this.$router.push({
           name: 'contest-details',
           params: { contestID: this.contests[this.index].id }
+        })
+      },
+      getExtraImage (url) {
+        axios
+        .get(url)
+        .then(response => {
+          return true
+        })
+        .catch(error => {
+          console.log(error ? 'no more images' : '')
+          return false
         })
       }
     }
@@ -121,7 +141,7 @@
   }
 
   .contest-content-description{
-    margin-top: 120px;
+    margin-top: 100px;
     height: 200px;
     white-space: nowrap;
     text-overflow: ellipsis;
