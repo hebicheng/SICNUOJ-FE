@@ -4,7 +4,7 @@
  * @Author: hebicheng
  * @Date: 2020-11-01 10:29:17
  * @LastEditors: hebicheng
- * @LastEditTime: 2020-11-03 09:56:17
+ * @LastEditTime: 2020-11-03 11:30:02
 -->
 <template>
   <Row type="flex" justify="space-around">
@@ -35,7 +35,7 @@
             </el-carousel-item> 
           </div>
           <el-carousel-item>
-            <a href="https:sicnu.ac.cn"><img src="/public/upload/home-banner-1.png" alt=""></a>
+            <a href="https://sicnu.ac.cn"><img src="/public/upload/home-banner-1.png" alt=""></a>
           </el-carousel-item>
           <el-carousel-item v-if="images[0]">
             <img src="/public/upload/home-banner-2.png" alt="">
