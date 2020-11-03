@@ -4,7 +4,7 @@
  * @Author: hebicheng
  * @Date: 2020-11-01 10:29:17
  * @LastEditors: hebicheng
- * @LastEditTime: 2020-11-02 19:50:21
+ * @LastEditTime: 2020-11-03 09:56:17
 -->
 <template>
   <Row type="flex" justify="space-around">
@@ -35,12 +35,12 @@
             </el-carousel-item> 
           </div>
           <el-carousel-item>
-            <img src="/public/upload/home-banner-1.png" alt="">
+            <a href="https:sicnu.ac.cn"><img src="/public/upload/home-banner-1.png" alt=""></a>
           </el-carousel-item>
-          <el-carousel-item v-if="getExtraImage('/public/upload/home-banner-2.png')">
+          <el-carousel-item v-if="images[0]">
             <img src="/public/upload/home-banner-2.png" alt="">
           </el-carousel-item>
-          <el-carousel-item v-if="getExtraImage('/public/upload/home-banner-3.png')">
+          <el-carousel-item v-if="images[1]">
             <img src="/public/upload/home-banner-3.png" alt="">
           </el-carousel-item>
         </el-carousel>
@@ -65,6 +65,7 @@
     },
     data () {
       return {
+        images: [false, false],
         contests: [],
         index: 0,
         CONTEST_STATUS_REVERSE: CONTEST_STATUS_REVERSE
@@ -75,6 +76,8 @@
       api.getContestList(0, 5, params).then((res) => {
         this.contests = res.data.data.results
       })
+      this.getExtraImage('/../public/upload/home-banner-2.png', 0)
+      this.getExtraImage('/../public/upload/home-banner-3.png', 1)
     },
   
     methods: {
@@ -88,15 +91,14 @@
           params: { contestID: this.contests[this.index].id }
         })
       },
-      getExtraImage (url) {
-        axios
+      async getExtraImage (url, index) {
+        await axios
         .get(url)
         .then(response => {
-          return true
+          this.images[index] = true
         })
         .catch(error => {
-          console.log(error ? 'no more images' : '')
-          return false
+          console.log(error)
         })
       }
     }
@@ -141,7 +143,7 @@
   }
 
   .contest-content-description{
-    margin-top: 100px;
+    margin-top: 120px;
     height: 200px;
     white-space: nowrap;
     text-overflow: ellipsis;
