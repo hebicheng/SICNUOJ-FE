@@ -1,4 +1,7 @@
 export const m = {
+  // Home
+  Enter_Contest: '進入比賽',
+  Preview_Contest: '預覽',
   // Problem.vue
   Description: '題目描述',
   Input: '輸入',
@@ -30,6 +33,14 @@ export const m = {
   Frequently_Asked_Questions: '常見問題',
   // ContestList.vue
   All: '全部',
+  Rule: '賽制',
+  OI: 'OI',
+  ACM: 'ACM',
+  Underway: '進行中',
+  Not_Started: '準備中',
+  Ended: '已結束',
+  No_contest: '暫時無',
+  Please_login_first: '請先登錄！',
   // ContestDetail.vue
   Problems: '題目',
   Announcements: '公告',
@@ -37,6 +48,12 @@ export const m = {
   Rankings: '排名',
   Overview: '概要',
   Admin_Helper: '管理員助手',
+  StartAt: '開始時間',
+  EndAt: '結束時間',
+  ContestType: '比賽類型',
+  Creator: '發起者',
+  Public: '開放',
+  Password_Protected: '密碼保護',
   // ContestProblemList.vue
   Problems_List: '試題列表',
 
@@ -58,6 +75,7 @@ export const m = {
   Settings: '我的設定',
   Management: '後台管理',
   Logout: '登出',
+  Welcome_to: '歡迎回來',
   // announcements.vue
   Refresh: '重新整理',
   Back: '返回',

@@ -4,7 +4,7 @@
  * @Author: hebicheng
  * @Date: 2020-11-01 10:29:17
  * @LastEditors: hebicheng
- * @LastEditTime: 2020-11-04 17:50:08
+ * @LastEditTime: 2020-11-04 19:38:00
 -->
 <template>
   <Row type="flex" justify="space-around">
@@ -16,7 +16,7 @@
               <h2 style="position: absolute; top:40px; left: 20px; text-align:center">
                 <Button type="text"  class="contest-title" @click="goContest(index)">{{contests[index].title}}
                 </Button>
-                <Button size="small" shape="circle" :type="contest.status === '0' ? 'success' : 'warning'" >{{CONTEST_STATUS_REVERSE[contest.status].name}}
+                <Button size="small" shape="circle" :type="contest.status === '0' ? 'success' : 'warning'" >{{$t('m.' + CONTEST_STATUS_REVERSE[contest.status].name.replace(/ /g, "_"))}}
                 </Button>
                 <Button type="info" shape="circle" size="small" icon="calendar">
                   {{contest.start_time | localtime('YYYY-M-D HH:mm') }}
@@ -33,7 +33,7 @@
               </div>
               <ButtonGroup shape="circle" class="btn-group">
                 <Button :type="contest.status === '0' ? 'success' : 'warning'" @click="goContest(index)">
-                  {{ contest.status === '0' ? '进入比赛' : '预览比赛' }}
+                  {{ contest.status === '0' ? $t('m.Enter_Contest') : $t('m.Preview_Contest') }}
                   <Icon type="chevron-right"></Icon>
                 </Button>
             </ButtonGroup>

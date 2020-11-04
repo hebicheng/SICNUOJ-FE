@@ -115,7 +115,7 @@
           {
             title: this.$i18n.t('m.Rule'),
             render: (h, params) => {
-              return h('span', this.$i18n.t('m.' + params.row.rule_type))
+              return h('span', params.row.rule_type)
             }
           },
           {

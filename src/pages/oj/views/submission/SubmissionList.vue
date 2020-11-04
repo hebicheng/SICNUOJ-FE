@@ -173,7 +173,7 @@
         loadingTable: false,
         submissions: [],
         total: 30,
-        limit: 12,
+        limit: 14,
         page: 1,
         contestID: '',
         problemID: '',

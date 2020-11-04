@@ -165,7 +165,7 @@
           }
         ],
         problemList: [],
-        limit: 20,
+        limit: 14,
         total: 0,
         loadings: {
           table: true,

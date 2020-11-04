@@ -1,5 +1,8 @@
 export const m = {
-    // 404.vue
+  // Home
+  Enter_Contest: '进入比赛',
+  Preview_Contest: '查看比赛',
+  // 404.vue
   Go_Home: '返回主页',
   // Problem.vue
   Description: '题目描述',

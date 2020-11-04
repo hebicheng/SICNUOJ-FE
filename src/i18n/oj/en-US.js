@@ -1,4 +1,7 @@
 export const m = {
+  // Home
+  Enter_Contest: 'Enter the game',
+  Preview_Contest: 'Preview',
   // 404.vue
   Go_Home: 'Go Home',
   // Problem.vue
