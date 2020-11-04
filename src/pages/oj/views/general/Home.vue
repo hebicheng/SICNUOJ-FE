@@ -4,54 +4,57 @@
  * @Author: hebicheng
  * @Date: 2020-11-01 10:29:17
  * @LastEditors: hebicheng
- * @LastEditTime: 2020-11-04 14:27:26
+ * @LastEditTime: 2020-11-04 17:50:08
 -->
 <template>
   <Row type="flex" justify="space-around">
     <Col :span="22">
-        <el-carousel :interval="5000" type="card" height="350px">
-          <div v-if="contests.length" class="contest">
-            <el-carousel-item v-for="(contest, index) of contests" :key="index" >       
-              <div class="contest-content">
-                <h2 style="position: absolute; top:40px; left: 20px; text-align:center">
-                  <Button type="text"  class="contest-title" @click="goContest(index)">{{contests[index].title}}
-                  </Button>
-                  <Button size="small" shape="circle" :type="contest.status === '0' ? 'success' : 'warning'" >{{CONTEST_STATUS_REVERSE[contest.status].name}}
-                  </Button>
-                  <Button type="info" shape="circle" size="small" icon="calendar">
-                    {{contest.start_time | localtime('YYYY-M-D HH:mm') }}
-                  </Button>
-                  <Button shape="circle" size="small" icon="android-time">
-                    {{getDuration(contest.start_time, contest.end_time)}}
-                  </Button>
-                  <Button shape="circle" size="small" icon="trophy">
-                    {{contest.rule_type}}
-                  </Button>
-                </h2> 
-                <div class="contest-content-description">
-                  <blockquote v-html="contest.description.slice(0, 400)"></blockquote>...
-                </div>
-                <ButtonGroup shape="circle" class="btn-group">
-                  <Button :type="contest.status === '0' ? 'success' : 'warning'" @click="goContest(index)">
-                    {{ contest.status === '0' ? '进入比赛' : '预览比赛' }}
-                    <Icon type="chevron-right"></Icon>
-                  </Button>
-              </ButtonGroup>
+      <el-carousel :interval="5000" type="card" height="350px">
+        <div v-if="contests.length" class="contest">
+          <el-carousel-item v-for="(contest, index) of contests" :key="index" >       
+            <div class="contest-content">
+              <h2 style="position: absolute; top:40px; left: 20px; text-align:center">
+                <Button type="text"  class="contest-title" @click="goContest(index)">{{contests[index].title}}
+                </Button>
+                <Button size="small" shape="circle" :type="contest.status === '0' ? 'success' : 'warning'" >{{CONTEST_STATUS_REVERSE[contest.status].name}}
+                </Button>
+                <Button type="info" shape="circle" size="small" icon="calendar">
+                  {{contest.start_time | localtime('YYYY-M-D HH:mm') }}
+                </Button>
+                <Button shape="circle" size="small" icon="android-time">
+                  {{getDuration(contest.start_time, contest.end_time)}}
+                </Button>
+                <Button shape="circle" size="small" icon="trophy">
+                  {{contest.rule_type}}
+                </Button>
+              </h2> 
+              <div class="contest-content-description">
+                <blockquote v-html="contest.description.slice(0, 400)"></blockquote>...
               </div>
-            </el-carousel-item> 
-          </div>
-          <el-carousel-item>
-            <a href="https://sicnu.ac.cn"><img src="/public/upload/home-banner-1.png" alt=""></a>
-          </el-carousel-item>
-          <el-carousel-item v-if="images[0]">
-            <img src="/public/upload/home-banner-2.png" alt="">
-          </el-carousel-item>
-          <el-carousel-item v-if="images[1]">
-            <img src="/public/upload/home-banner-3.png" alt="">
-          </el-carousel-item>
-        </el-carousel>
-      
-    <Announcements class="announcement"></Announcements>
+              <ButtonGroup shape="circle" class="btn-group">
+                <Button :type="contest.status === '0' ? 'success' : 'warning'" @click="goContest(index)">
+                  {{ contest.status === '0' ? '进入比赛' : '预览比赛' }}
+                  <Icon type="chevron-right"></Icon>
+                </Button>
+            </ButtonGroup>
+            </div>
+          </el-carousel-item> 
+        </div>
+        <el-carousel-item>
+          <a href="https://sicnu.ac.cn"><img src="/public/upload/home-banner-1.png" alt=""></a>
+        </el-carousel-item>
+        <el-carousel-item v-if="images[0]">
+          <img src="/public/upload/home-banner-2.png" alt="">
+        </el-carousel-item>
+        <el-carousel-item v-if="images[1]">
+          <img src="/public/upload/home-banner-3.png" alt="">
+        </el-carousel-item>
+      </el-carousel>
+    
+      <!-- <div class="home-pick-one">
+      </div> -->
+      <Announcements class="announcement"></Announcements>
+    
     </Col>
   </Row>
   
@@ -163,6 +166,12 @@
   
   .btn-group{
     bottom: 30px;
+  }
+  .home-pick-one{
+    background: white;
+    height: 100px;
+    margin-top: 20px;
+    border-radius: 25px;
   }
 
 </style>

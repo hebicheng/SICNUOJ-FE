@@ -1,10 +1,16 @@
 <template>
   <Row type="flex" :gutter="18">
-    <Col :span=19>
+    <Col :span=24>
     <Panel shadow>
       <div slot="title">{{$t('m.Problem_List')}}</div>
       <div slot="extra">
-        <ul class="filter">
+        <ul class="filter"> 
+          <li>
+            <Button type="primary" id="pick-one" @click="pickone">
+              <Icon type="shuffle"></Icon>
+              {{$t('m.Pick_One')}}
+            </Button>
+          </li>
           <li>
             <Dropdown @on-click="filterByDifficulty">
               <span>{{query.difficulty === '' ? this.$i18n.t('m.Difficulty') : this.$i18n.t('m.' + query.difficulty)}}
@@ -49,7 +55,7 @@
 
     </Col>
 
-    <Col :span="5">
+    <!-- <Col :span="5">
     <Panel :padding="10">
       <div slot="title" class="taglist-title">{{$t('m.Tags')}}</div>
       <Button v-for="tag in tagList"
@@ -67,7 +73,7 @@
       </Button>
     </Panel>
     <Spin v-if="loadings.tag" fix size="large"></Spin>
-    </Col>
+    </Col> -->
   </Row>
 </template>
 
@@ -295,7 +301,4 @@
     margin-bottom: 10px;
   }
 
-  #pick-one {
-    margin-top: 10px;
-  }
 </style>

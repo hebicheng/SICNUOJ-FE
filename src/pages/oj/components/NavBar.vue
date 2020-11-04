@@ -1,7 +1,12 @@
 <template>
 <div id="header">
-    <Menu theme="light" mode="horizontal" @on-select="handleRoute" :active-name="activeMenu" class="oj-menu">
-      <div class="logo"><img src="/public/upload/logo.ico"  alt="Logo" height="59" width="59" style="vertical-align:middle" /><span>{{website.website_name}}</span></div>
+    <Menu theme="dark" mode="horizontal" @on-select="handleRoute" :active-name="activeMenu" class="oj-menu">
+      <!-- <div class="logo"><img src="/public/upload/logo.ico"  alt="Logo" height="59" width="59" style="vertical-align:middle" />
+      </div> -->
+      <div class="logo">
+        <span class="font-color-w">{{website.website_name}}</span>
+      </div>
+      
       <Menu-item name="/">
         <Icon type="home"></Icon>
         {{$t('m.Home')}}
@@ -58,17 +63,24 @@
         </div>
       </template>
       <template v-else>
-        <Dropdown class="drop-menu" @on-click="handleRoute" placement="bottom" trigger="click">
+        <Dropdown class="drop-menu" @on-click="handleRoute" placement="bottom-end" trigger="hover" >
           <Button type="text" class="drop-menu-title">	
-	    <Tooltip v-bind:content="'Signed in as ' + user.username" placement="left-start">
-	    	<div class="avatar-container">
-          <img class="avatar" :src="profile.avatar"/>
-        </div>
-	    </Tooltip>	
-	    <Icon type="navicon"></Icon>
+          <div class="avatar-container">
+            <img class="avatar" :src="profile.avatar"/>
+          </div>
           </Button>
-          <Dropdown-menu slot="list">
-            <Dropdown-item name="/user-home">{{$t('m.MyHome')}}</Dropdown-item>
+          <Dropdown-menu slot="list" >
+            <Dropdown-item name="/user-home"  style="vertical-align:middle">
+            <div class="avatar-container" >
+              <img class="avatar-card" :src="profile.avatar" style="float:left"/>
+              <div style="min-width:140px; margin-left:70px;" >
+                <h2> {{ user.username }} </h2>
+                <span> {{ user.email }}</span>
+              </div>
+            </div>
+                      
+            </Dropdown-item>
+            <Dropdown-item divided name="/user-home">{{$t('m.MyHome')}}</Dropdown-item>
             <Dropdown-item name="/status?myself=1">{{$t('m.MySubmissions')}}</Dropdown-item>
             <Dropdown-item name="/setting/profile">{{$t('m.Settings')}}</Dropdown-item>
             <Dropdown-item v-if="isAdminRole" name="/admin">{{$t('m.Management')}}</Dropdown-item>
@@ -144,7 +156,7 @@
     background-color: #fff;
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
     .oj-menu {
-      background: #fdfdfd;
+      background: url('../../../assets/nav-s.png');
     }
 
     .logo {
@@ -183,11 +195,23 @@
       left:50%;
       transform: translate(-50%);
       z-index: 1;
+      padding: 20px;
       .avatar {
-        width: 35px;
-        height: 35px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        box-shadow: 0 1px 1px 0;
+      }
+      .avatar-card {
+        width: 55px;
+        height: 55px;
         border-radius: 50%;
         box-shadow: 0 1px 1px 0;
       }
     }
+  .font-color-w{
+    color: white;
+  }
+
+  
 </style>
