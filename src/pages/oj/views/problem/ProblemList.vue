@@ -25,7 +25,7 @@
             </Dropdown>
           </li>
           <li>
-            <i-switch size="large" @on-change="handleTagsVisible">
+            <i-switch v-model="tag_sw" size="large" @on-change="handleTagsVisible">
               <span slot="open">{{$t('m.Tags')}}</span>
               <span slot="close">{{$t('m.Tags')}}</span>
             </i-switch>
@@ -92,6 +92,7 @@
     },
     data () {
       return {
+        tag_sw: true,
         tagList: [],
         problemTableColumns: [
           {
@@ -181,6 +182,7 @@
     },
     mounted () {
       this.init()
+      this.handleTagsVisible(this.tag_sw)
     },
     methods: {
       init (simulate = false) {
@@ -249,7 +251,17 @@
               render: (h, params) => {
                 let tags = []
                 params.row.tags.forEach(tag => {
-                  tags.push(h('Tag', {}, tag))
+                  tags.push(h('Button', {
+                    props: {
+                      type: 'dashed',
+                      size: 'small'
+                    },
+                    on: {
+                      click: () => {
+                        this.filterByTag(tag)
+                      }
+                    }
+                  }, tag))
                 })
                 return h('div', {
                   style: {
