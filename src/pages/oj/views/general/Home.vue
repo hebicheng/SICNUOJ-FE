@@ -4,7 +4,7 @@
  * @Author: hebicheng
  * @Date: 2020-11-01 10:29:17
  * @LastEditors: hebicheng
- * @LastEditTime: 2020-11-03 11:30:02
+ * @LastEditTime: 2020-11-04 14:27:26
 -->
 <template>
   <Row type="flex" justify="space-around">
@@ -31,6 +31,12 @@
                 <div class="contest-content-description">
                   <blockquote v-html="contest.description.slice(0, 400)"></blockquote>...
                 </div>
+                <ButtonGroup shape="circle" class="btn-group">
+                  <Button :type="contest.status === '0' ? 'success' : 'warning'" @click="goContest(index)">
+                    {{ contest.status === '0' ? '进入比赛' : '预览比赛' }}
+                    <Icon type="chevron-right"></Icon>
+                  </Button>
+              </ButtonGroup>
               </div>
             </el-carousel-item> 
           </div>
@@ -57,6 +63,7 @@
   import time from '@/utils/time'
   import { CONTEST_STATUS, CONTEST_STATUS_REVERSE } from '@/utils/constants'
   import axios from 'axios'
+  import 'element-ui/lib/theme-chalk/index.css'
 
   export default {
     name: 'home',
@@ -106,7 +113,6 @@
 </script>
 
 <style lang="less" scoped>
-  @import url("https://unpkg.com/element-ui@2.3.7/lib/theme-chalk/index.css");
   .contest {
     &-title {
       font-style: italic;
@@ -150,8 +156,13 @@
     overflow: hidden;
   }
 
-  img{
-    width: 100%;
-    height: 100%;
+  // img{
+  //   width: 100%;
+  //   height: 100%;
+  // }
+  
+  .btn-group{
+    bottom: 30px;
   }
+
 </style>
