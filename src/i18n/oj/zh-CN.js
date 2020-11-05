@@ -202,7 +202,7 @@ export const m = {
   Low: '低',
   All: '全部',
   Reset: '重置',
-  Pick_One: '选择',
+  Pick_One: '试试手气',
   Difficulty: '难度',
   Total: '总数',
   AC_Rate: '通过率',
