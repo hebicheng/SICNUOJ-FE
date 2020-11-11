@@ -47,6 +47,10 @@
           {{$t('m.FAQ')}}
         </Menu-item>
       </Submenu>
+      <Menu-item name="/gitlab">
+        <Icon type="fork-repo"></Icon>
+        Gitlab
+      </Menu-item>
       <template v-if="!isAuthenticated">
         <div class="btn-menu">
           <Button type="primary"
