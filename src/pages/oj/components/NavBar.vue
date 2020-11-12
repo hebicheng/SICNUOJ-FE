@@ -118,7 +118,11 @@
       ...mapActions(['getProfile', 'changeModalStatus']),
       handleRoute (route) {
         if (route && route.indexOf('admin') < 0) {
-          this.$router.push(route)
+          if (route.indexOf('gitlab') < 0) {
+            this.$router.push(route)
+          } else {
+            window.open('/gitlab/')
+          }
         } else {
           window.open('/admin/')
         }

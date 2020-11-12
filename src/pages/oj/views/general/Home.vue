@@ -4,7 +4,7 @@
  * @Author: hebicheng
  * @Date: 2020-11-01 10:29:17
  * @LastEditors: hebicheng
- * @LastEditTime: 2020-11-04 19:38:00
+ * @LastEditTime: 2020-11-12 09:00:53
 -->
 <template>
   <Row type="flex" justify="space-around">
@@ -75,7 +75,7 @@
     },
     data () {
       return {
-        images: [false, false],
+        images: [],
         contests: [],
         index: 0,
         CONTEST_STATUS_REVERSE: CONTEST_STATUS_REVERSE
@@ -86,8 +86,8 @@
       api.getContestList(0, 5, params).then((res) => {
         this.contests = res.data.data.results
       })
-      this.getExtraImage('/../public/upload/home-banner-2.png', 0)
-      this.getExtraImage('/../public/upload/home-banner-3.png', 1)
+      this.getExtraImage('/../public/upload/home-banner-2.png')
+      this.getExtraImage('/../public/upload/home-banner-3.png')
     },
   
     methods: {
@@ -101,11 +101,11 @@
           params: { contestID: this.contests[this.index].id }
         })
       },
-      async getExtraImage (url, index) {
+      async getExtraImage (url) {
         await axios
         .get(url)
         .then(response => {
-          this.images[index] = true
+          this.images.push(url)
         })
         .catch(error => {
           console.log(error)
