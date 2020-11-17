@@ -47,10 +47,20 @@
           {{$t('m.FAQ')}}
         </Menu-item>
       </Submenu>
-      <Menu-item name="/gitlab">
-        <Icon type="fork-repo"></Icon>
-        Gitlab
-      </Menu-item>
+      <Submenu name="Service">
+        <template slot="title">
+          <Icon type="ios-photos-outline"></Icon>
+          Service
+        </template>
+        <Menu-item name="/gitlab">
+          <Icon type="fork-repo"></Icon>
+          GitLab
+        </Menu-item>
+        <Menu-item name="/minio">
+          <Icon type="cloud"></Icon>
+          MinIO
+        </Menu-item>
+      </Submenu>
       <template v-if="!isAuthenticated">
         <div class="btn-menu">
           <Button type="primary"
@@ -118,10 +128,12 @@
       ...mapActions(['getProfile', 'changeModalStatus']),
       handleRoute (route) {
         if (route && route.indexOf('admin') < 0) {
-          if (route.indexOf('gitlab') < 0) {
-            this.$router.push(route)
-          } else {
+          if (route.indexOf('gitlab') !== -1) {
             window.open('/gitlab/')
+          } else if (route.indexOf('minio') !== -1) {
+            window.open('/minio/storage/')
+          } else {
+            this.$router.push(route)
           }
         } else {
           window.open('/admin/')
