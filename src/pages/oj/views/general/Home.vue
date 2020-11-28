@@ -4,7 +4,7 @@
  * @Author: hebicheng
  * @Date: 2020-11-01 10:29:17
  * @LastEditors: hebicheng
- * @LastEditTime: 2020-11-28 10:34:10
+ * @LastEditTime: 2020-11-28 11:03:20
 -->
 <template>
   <Row type="flex" justify="space-around">
@@ -50,11 +50,7 @@
           <img src="/public/upload/home-banner-3.png" alt="">
         </el-carousel-item>
       </el-carousel>
-    
-      <!-- <div class="home-pick-one">
-      </div> -->
       <Announcements class="announcement"></Announcements>
-    
     </Col>
   </Row>
   
