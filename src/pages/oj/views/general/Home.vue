@@ -4,7 +4,7 @@
  * @Author: hebicheng
  * @Date: 2020-11-01 10:29:17
  * @LastEditors: hebicheng
- * @LastEditTime: 2020-11-28 10:28:21
+ * @LastEditTime: 2020-11-28 10:34:10
 -->
 <template>
   <Row type="flex" justify="space-around">
@@ -44,7 +44,7 @@
           <a href="https://sicnu.ac.cn"><img src="/public/upload/home-banner-1.png" alt=""></a>
         </el-carousel-item>
         <el-carousel-item v-if="images[0]">
-          <a href="https://sicnu.ac.cn/gitlab"><img src="/public/upload/home-banner-2.png" alt=""></a>
+          <a href="/gitlab"><img src="/public/upload/home-banner-2.png" alt=""></a>
         </el-carousel-item>
         <el-carousel-item v-if="images[1]">
           <img src="/public/upload/home-banner-3.png" alt="">
