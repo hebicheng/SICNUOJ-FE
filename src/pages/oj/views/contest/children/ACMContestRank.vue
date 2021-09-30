@@ -64,7 +64,7 @@
         columns: [
           {
             align: 'center',
-            width: 50,
+            width: 60,
             fixed: 'left',
             render: (h, params) => {
               return h('span', {}, params.index + (this.page - 1) * this.limit + 1)
@@ -251,6 +251,7 @@
             dataRank[i][problemID] = info[problemID]
             dataRank[i][problemID].ac_time = time.secondFormat(dataRank[i][problemID].ac_time)
             let status = info[problemID]
+            console.log(info[problemID])
             if (status.is_first_ac) {
               cellClass[problemID] = 'first-ac'
             } else if (status.is_ac) {

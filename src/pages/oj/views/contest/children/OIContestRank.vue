@@ -29,7 +29,7 @@
     <div v-show="showChart" class="echarts">
       <ECharts :options="options" ref="chart" auto-resize></ECharts>
     </div>
-    <Table ref="tableRank" class="auto-resize" :columns="columns" :data="dataRank" disabled-hover></Table>
+    <Table ref="tableRank"  :columns="columns" :data="dataRank" disabled-hover></Table>
     <Pagination :total="total"
                 :page-size.sync="limit"
                 :current.sync="page"
@@ -59,6 +59,7 @@
         columns: [
           {
             align: 'center',
+            fixed: 'left',
             width: 60,
             render: (h, params) => {
               return h('span', {}, params.index + (this.page - 1) * this.limit + 1)
@@ -67,6 +68,8 @@
           {
             title: this.$i18n.t('m.User_User'),
             align: 'center',
+            fixed: 'left',
+            width: 150,
             render: (h, params) => {
               return h('a', {
                 style: {
@@ -88,6 +91,8 @@
           {
             title: this.$i18n.t('m.Total_Score'),
             align: 'center',
+            width: 100,
+            fixed: 'left',
             render: (h, params) => {
               return h('a', {
                 on: {
@@ -190,9 +195,18 @@
         // 见https://www.iviewui.com/components/table
         dataRank.forEach((rank, i) => {
           let info = rank.submission_info
+          let cellClass = {}
           Object.keys(info).forEach(problemID => {
+            if (info[problemID] === 100) {
+              cellClass[problemID] = 'full-score'
+            } else if (info[problemID] > 0) {
+              cellClass[problemID] = 'have-score'
+            } else {
+              cellClass[problemID] = 'no-score'
+            }
             dataRank[i][problemID] = info[problemID]
           })
+          dataRank[i].cellClassName = cellClass
         })
         this.dataRank = dataRank
       },
@@ -201,6 +215,7 @@
           this.columns.push({
             align: 'center',
             key: problem.id,
+            width: problems.length > 15 ? 80 : null,
             renderHeader: (h, params) => {
               return h('a', {
                 'class': {
