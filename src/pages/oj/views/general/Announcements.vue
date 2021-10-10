@@ -4,7 +4,7 @@
       {{title}}
     </div>
     <div slot="extra">
-      <Button v-if="listVisible" type="info" @click="init" :loading="btnLoading">{{$t('m.Refresh')}}</Button>
+      <Button v-if="listVisible" type="primary" @click="init" :loading="btnLoading">{{$t('m.Refresh')}}</Button>
       <Button v-else icon="ios-undo" @click="goBack">{{$t('m.Back')}}</Button>
     </div>
 

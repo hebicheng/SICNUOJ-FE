@@ -7,9 +7,9 @@
         <ul class="filter">
           <li>
             <Dropdown @on-click="onRuleChange">
-              <span>{{query.rule_type === '' ? this.$i18n.t('m.Rule') : this.$i18n.t('m.' + query.rule_type)}}
+              <Button type='primary'>{{query.rule_type === '' ? this.$i18n.t('m.Rule') : this.$i18n.t('m.' + query.rule_type)}}
                 <Icon type="arrow-down-b"></Icon>
-              </span>
+              </Button>
               <Dropdown-menu slot="list">
                 <Dropdown-item name="">{{$t('m.All')}}</Dropdown-item>
                 <Dropdown-item name="OI">{{$t('m.OI')}}</Dropdown-item>
@@ -19,9 +19,9 @@
           </li>
           <li>
             <Dropdown @on-click="onStatusChange">
-              <span>{{query.status === '' ? this.$i18n.t('m.Status') : this.$i18n.t('m.' + CONTEST_STATUS_REVERSE[query.status].name.replace(/ /g,"_"))}}
+              <Button type='primary'>{{query.status === '' ? this.$i18n.t('m.Status') : this.$i18n.t('m.' + CONTEST_STATUS_REVERSE[query.status].name.replace(/ /g,"_"))}}
                 <Icon type="arrow-down-b"></Icon>
-              </span>
+              </Button>
               <Dropdown-menu slot="list">
                 <Dropdown-item name="">{{$t('m.All')}}</Dropdown-item>
                 <Dropdown-item name="0">{{$t('m.Underway')}}</Dropdown-item>
@@ -73,7 +73,7 @@
         </li>
       </ol>
     </Panel>
-    <Pagination :total="total" :page-size.sync="limit" @on-change="changeRoute" :current.sync="page" :show-sizer="true" @on-page-size-change="changeRoute"></Pagination>
+    <Pagination :total="total" :page-size.sync="limit" @on-change="changeRoute" :current.sync="page" ></Pagination>
     </Col>
   </Row>
 

@@ -38,7 +38,7 @@
                    icon="ios-search-strong"/>
           </li>
           <li>
-            <Button type="info" @click="onReset">
+            <Button type="primary" @click="onReset">
               <Icon type="refresh"></Icon>
               {{$t('m.Reset')}}
             </Button>
@@ -52,7 +52,7 @@
              disabled-hover></Table>
     </Panel>
     <Pagination
-      :total="total" :page-size.sync="query.limit" @on-change="pushRouter" @on-page-size-change="pushRouter" :current.sync="query.page" :show-sizer="true"></Pagination>
+      :total="total" :page-size="limit" @on-change="pushRouter" :current.sync="query.page"></Pagination>
 
     </Col>
 
@@ -177,8 +177,7 @@
           keyword: '',
           difficulty: '',
           tag: '',
-          page: 1,
-          limit: 10
+          page: 1
         }
       }
     },
@@ -197,7 +196,6 @@
         if (this.query.page < 1) {
           this.query.page = 1
         }
-        this.query.limit = parseInt(query.limit) || 10
         if (!simulate) {
           this.getTagList()
         }
@@ -210,7 +208,7 @@
         })
       },
       getProblemList () {
-        let offset = (this.query.page - 1) * this.query.limit
+        let offset = (this.query.page - 1) * this.limit
         this.loadings.table = true
         api.getProblemList(offset, this.limit, this.query).then(res => {
           this.loadings.table = false

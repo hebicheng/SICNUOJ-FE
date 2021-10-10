@@ -8,7 +8,7 @@
           <i-switch style="margin-left: 5px;" @on-change="handleAutoRefresh"></i-switch>
         </li>
         <li>
-          <Button type="info" @click="getACInfo">{{$t('m.Refresh')}}</Button>
+          <Button type="primary" @click="getACInfo">{{$t('m.Refresh')}}</Button>
         </li>
       </ul>
     </div>
@@ -110,7 +110,7 @@
             title: this.$i18n.t('m.Option'),
             fixed: 'right',
             align: 'center',
-            width: 100,
+            width: 120,
             render: (h, {row}) => {
               return h('Button', {
                 props: {

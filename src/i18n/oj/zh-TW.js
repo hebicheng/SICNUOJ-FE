@@ -138,15 +138,6 @@ export const m = {
   Creator: '發起人',
   Public: '公開',
   Password_Protected: '密碼保護',
-  // ContestList.vue
-  Rule: '賽制',
-  OI: 'OI',
-  ACM: 'ACM',
-  Underway: '進行中',
-  Not_Started: '準備中',
-  Ended: '已結束',
-  No_contest: '目前無任何比賽',
-  Please_login_first: '請先登入!',
   // ContestProblemList.vue
   Problems_List: '試題列表',
   No_Problems: '暫無試題',
@@ -214,7 +205,6 @@ export const m = {
   High: '高級',
   Mid: '中級',
   Low: '初級',
-  All: '全部',
   Reset: '重置',
   Pick_One: '選擇',
   Difficulty: '難度',

@@ -7,9 +7,9 @@
           <ul class="filter">
             <li>
               <Dropdown @on-click="handleResultChange">
-                <span>{{status}}
+                <Button type='primary'> {{status}}
                   <Icon type="arrow-down-b"></Icon>
-                </span>
+                </Button>
                 <Dropdown-menu slot="list">
                   <Dropdown-item name="">{{$t('m.All')}}</Dropdown-item>
                   <Dropdown-item v-for="status in Object.keys(JUDGE_STATUS)" :key="status" :name="status">
@@ -31,7 +31,7 @@
             </li>
 
             <li>
-              <Button type="info" icon="refresh" @click="getSubmissions">{{$t('m.Refresh')}}</Button>
+              <Button type="primary" icon="refresh" @click="getSubmissions">{{$t('m.Refresh')}}</Button>
             </li>
           </ul>
         </div>
@@ -254,7 +254,7 @@
           title: this.$i18n.t('m.Option'),
           fixed: 'right',
           align: 'center',
-          width: 90,
+          width: 100,
           render: (h, params) => {
             return h('Button', {
               props: {
