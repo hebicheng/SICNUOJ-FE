@@ -108,6 +108,7 @@
           }
         ],
         dataRank: [],
+        idToTotalScoreDic: {},
         options: {
           title: {
             text: this.$i18n.t('m.Top_10_Teams'),
@@ -188,16 +189,22 @@
         this.options.xAxis[0].data = usernames
         this.options.series[0].data = scores
       },
-      applyToTable (data) {
+      async applyToTable (data) {
         // deepcopy
         let dataRank = JSON.parse(JSON.stringify(data))
         // 从submission_info中取出相应的problem_id 放入到父object中,这么做主要是为了适应iview table的data格式
         // 见https://www.iviewui.com/components/table
+        // 由于异步，此处可能还没有获取到比赛题目信息，所以单独获取一次，可能会造成性能消耗，看情况是否保留
+        await this.getContestProblems().then((res) => {
+          res.data.data.forEach(item => {
+            this.idToTotalScoreDic[item['id']] = item['total_score']
+          })
+        })
         dataRank.forEach((rank, i) => {
           let info = rank.submission_info
           let cellClass = {}
-          Object.keys(info).forEach(problemID => {
-            if (info[problemID] === 100) {
+          Object.keys(info).forEach((problemID) => {
+            if (info[problemID] === this.idToTotalScoreDic[problemID]) {
               cellClass[problemID] = 'full-score'
             } else if (info[problemID] > 0) {
               cellClass[problemID] = 'have-score'
