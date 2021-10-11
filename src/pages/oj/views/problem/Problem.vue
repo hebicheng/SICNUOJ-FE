@@ -292,7 +292,6 @@
           problem.languages = problem.languages.sort()
           this.problem = problem
           this.changePie(problem)
-
           // 在beforeRouteEnter中修改了, 说明本地有code，无需加载template
           if (this.code !== '') {
             return
@@ -324,7 +323,10 @@
         let data2 = JSON.parse(JSON.stringify(data))
         data2[1].selected = true
         this.largePie.series[1].data = data2
-
+        // OI模式封榜时statistic_info为空，会导致代码无法正确执行，导致错误（如：代码模板不加载）
+        if (problemData.statistic_info === undefined) {
+          return
+        }
         // 根据结果设置legend,没有提交过的legend不显示
         let legend = Object.keys(problemData.statistic_info).map(ele => JUDGE_STATUS[ele].short)
         if (legend.length === 0) {
