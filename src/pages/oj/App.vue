@@ -1,4 +1,5 @@
 <template>
+  <overlay-scrollbars>
   <div>
     <NavBar></NavBar>
     <div class="content-app">
@@ -14,6 +15,7 @@
     </div>
     <BackTop></BackTop>
   </div>
+  </overlay-scrollbars>
 </template>
 
 <script>

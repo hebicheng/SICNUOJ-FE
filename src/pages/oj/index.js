@@ -4,7 +4,7 @@
  * @Author: hebicheng
  * @Date: 2020-11-01 10:29:17
  * @LastEditors: hebicheng
- * @LastEditTime: 2020-11-02 18:42:27
+ * @LastEditTime: 2021-10-21 19:20:27
  */
 import 'babel-polyfill'
 import Vue from 'vue'
@@ -18,6 +18,10 @@ import { GOOGLE_ANALYTICS_ID } from '@/utils/constants'
 
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
+
+import 'overlayscrollbars/css/OverlayScrollbars.css'
+import OverlayScrollbars from 'overlayscrollbars'
+import { OverlayScrollbarsPlugin } from 'overlayscrollbars-vue'
 
 import Panel from '@oj/components/Panel.vue'
 import VerticalMenu from '@oj/components/verticalMenu/verticalMenu.vue'
@@ -56,6 +60,7 @@ Vue.use(VueClipboard)
 Vue.use(highlight)
 Vue.use(katex)
 Vue.use(ElementUI)
+Vue.use(OverlayScrollbarsPlugin)
 Vue.use(VueAnalytics, {
   id: GOOGLE_ANALYTICS_ID,
   router
@@ -76,3 +81,8 @@ Vue.prototype.$info = (s) => Vue.prototype.$Message.info(s)
 Vue.prototype.$success = (s) => Vue.prototype.$Message.success(s)
 
 new Vue(Vue.util.extend({router, store, i18n}, App)).$mount('#app')
+OverlayScrollbars(document.body, {
+  nativeScrollbarsOverlaid: {
+    initialize: false
+  }
+})

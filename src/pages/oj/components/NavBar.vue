@@ -166,7 +166,7 @@
 
 <style lang="less" scoped>
   #header {
-    min-width: 300px;
+    min-width: 950px;
     position: fixed;
     top: 0;
     left: 0;
