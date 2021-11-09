@@ -517,7 +517,6 @@
       // 防止切换组件后仍然不断请求
       clearInterval(this.refreshStatus)
       this.$store.commit(types.CHANGE_CONTEST_ITEM_VISIBLE, {menu: true})
-      console.log(buildProblemCodeKey(this.problem._id, from.params.contestID, this.language))
       this.saveCodeLocal()
       next()
     },
