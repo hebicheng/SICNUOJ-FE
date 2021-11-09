@@ -294,7 +294,7 @@
             this.theme = problemCode.theme
           }
           // 如果获取到本地的代码，则直接返回
-          if (this.code !== '') {
+          if (this.code.trim() !== '') {
             return
           }
           // try to load problem template
@@ -370,7 +370,7 @@
           this.code = ''
         }
         if (this.problem.template[newLang]) {
-          if (this.code === '') {
+          if (this.code.trim() === '') {
             this.code = this.problem.template[newLang]
           }
         }
