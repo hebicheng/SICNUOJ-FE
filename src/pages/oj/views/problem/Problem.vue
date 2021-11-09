@@ -205,7 +205,7 @@
   import CodeMirror from '@oj/components/CodeMirror.vue'
   import storage from '@/utils/storage'
   import {FormMixin} from '@oj/components/mixins'
-  import {JUDGE_STATUS, CONTEST_STATUS, buildProblemCodeKey} from '@/utils/constants'
+  import {JUDGE_STATUS, CONTEST_STATUS, buildProblemCodeKey, buildProblemLatestLangKey} from '@/utils/constants'
   import api from '@oj/api'
   import {pie, largePie} from './chartData'
 
@@ -259,20 +259,9 @@
         }
       }
     },
-    beforeRouteEnter (to, from, next) {
-      let problemCode = storage.get(buildProblemCodeKey(to.params.problemID, to.params.contestID))
-      if (problemCode) {
-        next(vm => {
-          vm.language = problemCode.language
-          vm.code = problemCode.code
-          vm.theme = problemCode.theme
-        })
-      } else {
-        next()
-      }
-    },
     mounted () {
       this.$store.commit(types.CHANGE_CONTEST_ITEM_VISIBLE, {menu: false})
+      // window.addEventListener('beforeunload', e => this.beforeunloadFn(e))
       this.init()
     },
     methods: {
@@ -291,13 +280,24 @@
           })
           problem.languages = problem.languages.sort()
           this.problem = problem
+          let latestCodeLang = storage.get(buildProblemLatestLangKey(this.problemID, this.contestID))
+          if (latestCodeLang && this.problem.languages.indexOf(latestCodeLang) !== -1) {
+            this.language = latestCodeLang
+          } else {
+            this.language = this.problem.languages[0]
+          }
           this.changePie(problem)
-          // 在beforeRouteEnter中修改了, 说明本地有code，无需加载template
+          let problemCode = storage.get(buildProblemCodeKey(this.problemID, this.contestID, this.language))
+          if (problemCode) {
+            this.language = problemCode.language
+            this.code = problemCode.code
+            this.theme = problemCode.theme
+          }
+          // 如果获取到本地的代码，则直接返回
           if (this.code !== '') {
             return
           }
           // try to load problem template
-          this.language = this.problem.languages[0]
           let template = this.problem.template
           if (template && template[this.language]) {
             this.code = template[this.language]
@@ -305,6 +305,18 @@
         }, () => {
           this.$Loading.error()
         })
+      },
+      saveCodeLocal (latestLang = null) {
+        storage.set(buildProblemCodeKey(this.problemID, this.contestID, this.language), {
+          code: this.code,
+          language: this.language,
+          theme: this.theme
+        })
+        if (latestLang) {
+          storage.set(buildProblemLatestLangKey(this.problemID, this.contestID), latestLang)
+        } else {
+          storage.set(buildProblemLatestLangKey(this.problemID, this.contestID), this.language)
+        }
       },
       changePie (problemData) {
         // 只显示特定的一些状态
@@ -349,8 +361,16 @@
         this.$router.push(route)
       },
       onChangeLang (newLang) {
+        // 先保存当前语言的代码
+        this.saveCodeLocal(newLang)
+        let problemCode = storage.get(buildProblemCodeKey(this.problemID, this.contestID, newLang))
+        if (problemCode) {
+          this.code = problemCode.code
+        } else {
+          this.code = ''
+        }
         if (this.problem.template[newLang]) {
-          if (this.code.trim() === '') {
+          if (this.code === '') {
             this.code = this.problem.template[newLang]
           }
         }
@@ -369,6 +389,7 @@
             } else {
               this.code = ''
             }
+            this.saveCodeLocal()
           }
         })
       },
@@ -421,6 +442,7 @@
             // 定时检查状态
             this.submitting = false
             this.submissionExists = true
+            this.saveCodeLocal()
             if (!detailsVisible) {
               this.$Modal.success({
                 title: this.$i18n.t('m.Success'),
@@ -494,13 +516,9 @@
     beforeRouteLeave (to, from, next) {
       // 防止切换组件后仍然不断请求
       clearInterval(this.refreshStatus)
-
       this.$store.commit(types.CHANGE_CONTEST_ITEM_VISIBLE, {menu: true})
-      storage.set(buildProblemCodeKey(this.problem._id, from.params.contestID), {
-        code: this.code,
-        language: this.language,
-        theme: this.theme
-      })
+      console.log(buildProblemCodeKey(this.problem._id, from.params.contestID, this.language))
+      this.saveCodeLocal()
       next()
     },
     watch: {

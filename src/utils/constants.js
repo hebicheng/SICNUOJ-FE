@@ -120,11 +120,18 @@ export const STORAGE_KEY = {
   languages: 'languages'
 }
 
-export function buildProblemCodeKey (problemID, contestID = null) {
+export function buildProblemCodeKey (problemID, contestID = null, language) {
   if (contestID) {
-    return `${STORAGE_KEY.PROBLEM_CODE}_${contestID}_${problemID}`
+    return `${STORAGE_KEY.PROBLEM_CODE}_${contestID}_${problemID}_${language}`
   }
-  return `${STORAGE_KEY.PROBLEM_CODE}_NaN_${problemID}`
+  return `${STORAGE_KEY.PROBLEM_CODE}_NaN_${problemID}_${language}`
 }
 
-export const GOOGLE_ANALYTICS_ID = 'UA-111499601-1'
+export function buildProblemLatestLangKey (problemID, contestID = null) {
+  if (contestID) {
+    return `${STORAGE_KEY.PROBLEM_CODE}_${contestID}_${problemID}_latest_lang`
+  }
+  return `${STORAGE_KEY.PROBLEM_CODE}_NaN_${problemID}_latest_lang`
+}
+
+export const GOOGLE_ANALYTICS_ID = '000000000'
