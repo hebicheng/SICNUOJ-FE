@@ -208,6 +208,8 @@
   import {JUDGE_STATUS, CONTEST_STATUS, buildProblemCodeKey, buildProblemLatestLangKey} from '@/utils/constants'
   import api from '@oj/api'
   import {pie, largePie} from './chartData'
+  import returnCitySN from 'returnCitySN'
+  import usPaser from 'ua-parser-js'
 
   // 只显示这些状态的图形占用
   const filtedStatus = ['-1', '-2', '0', '1', '2', '3', '4', '8']
@@ -426,10 +428,19 @@
         this.submissionId = ''
         this.result = {result: 9}
         this.submitting = true
+
+        let extraInfo = ''
+        if (this.language.indexOf('Python') === -1) {
+          extraInfo += '\n\n// submitted extra informations:'
+          extraInfo += '\n// ip:' + returnCitySN['cip']
+          const ua = usPaser(navigator.userAgent)
+          extraInfo += '\n// system: ' + ua.os.name + '/' + ua.os.version
+          extraInfo += '\n// browser: ' + ua.browser.name + '/' + ua.browser.version
+        }
         let data = {
           problem_id: this.problem.id,
           language: this.language,
-          code: this.code,
+          code: this.code + extraInfo,
           contest_id: this.contestID
         }
         if (this.captchaRequired) {

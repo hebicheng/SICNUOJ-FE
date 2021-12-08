@@ -179,7 +179,8 @@
         problemID: '',
         routeName: '',
         JUDGE_STATUS: '',
-        rejudge_column: false
+        rejudge_column: false,
+        extra_info: false
       }
     },
     mounted () {
@@ -225,6 +226,7 @@
             v.loading = false
           }
           this.adjustRejudgeColumn()
+          this.adjustExtraInfoColumn()
           this.loadingTable = false
           this.submissions = data.results
           this.total = data.total
@@ -273,6 +275,29 @@
         this.columns.push(judgeColumn)
         this.rejudge_column = true
       },
+      adjustExtraInfoColumn () {
+        if (!this.extraInfoColumnVisible || this.external_column) {
+          return
+        }
+        const extraInfoColumn = {
+          title: '用户信息',
+          align: 'center',
+          render: (h, params) => {
+            return h('Poptip', {
+              props: {
+                content: 'Browser: ' + params.row.browser + ' System: ' + params.row.system,
+                trigger: 'hover'
+              }
+            }, [h('Tag', {
+              props: {
+                color: 'yellow'
+              }
+            }, params.row.ip)])
+          }
+        }
+        this.columns.push(extraInfoColumn)
+        this.external_column = true
+      },
       handleResultChange (status) {
         this.page = 1
         this.formFilter.result = status
@@ -294,7 +319,7 @@
       }
     },
     computed: {
-      ...mapGetters(['isAuthenticated', 'user']),
+      ...mapGetters(['isAuthenticated', 'user', 'isContestAdmin']),
       title () {
         if (!this.contestID) {
           return this.$i18n.t('m.Status')
@@ -309,6 +334,9 @@
       },
       rejudgeColumnVisible () {
         return !this.contestID && this.user.admin_type === USER_TYPE.SUPER_ADMIN
+      },
+      extraInfoColumnVisible () {
+        return this.contestID && this.isContestAdmin
       }
     },
     watch: {
@@ -319,6 +347,9 @@
       },
       'rejudgeColumnVisible' () {
         this.adjustRejudgeColumn()
+      },
+      'extraInfoColumnVisible' () {
+        this.adjustExtraInfoColumn()
       },
       'isAuthenticated' () {
         this.init()

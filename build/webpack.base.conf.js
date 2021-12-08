@@ -40,9 +40,11 @@ const globOptions = {cwd: resolve('static/js')};
 let vendorAssets = glob.sync('vendor.dll.*.js', globOptions);
 vendorAssets = vendorAssets.map(file => 'static/js/' + file)
 
-
 module.exports = {
   entry: entries,
+  externals: {
+    "returnCitySN": "returnCitySN"
+  },
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
