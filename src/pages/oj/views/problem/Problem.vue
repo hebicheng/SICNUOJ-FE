@@ -432,7 +432,7 @@
         let extraInfo = ''
         if (this.language.indexOf('Python') === -1) {
           extraInfo += '\n\n// submitted extra informations:'
-          extraInfo += '\n// ip:' + returnCitySN['cip']
+          extraInfo += '\n// ip: ' + returnCitySN['cip']
           const ua = usPaser(navigator.userAgent)
           extraInfo += '\n// system: ' + ua.os.name + '/' + ua.os.version
           extraInfo += '\n// browser: ' + ua.browser.name + '/' + ua.browser.version
