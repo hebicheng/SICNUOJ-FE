@@ -167,14 +167,14 @@
       }
     },
     mounted () {
-      if (this.isSuperAdmin) {
-        this.refreshJudgeServerList()
-        this.intervalId = setInterval(() => {
-          this.refreshJudgeServerList()
-        }, 5000)
-      }
       api.getDashboardInfo().then(resp => {
         this.infoData = resp.data.data
+        if (this.isSuperAdmin) {
+          this.refreshJudgeServerList()
+          this.intervalId = setInterval(() => {
+            this.refreshJudgeServerList()
+          }, 5000)
+        }
       }, () => {
       })
       api.getSessions().then(resp => {
