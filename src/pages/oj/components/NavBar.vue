@@ -6,7 +6,7 @@
       <div class="logo">
         <span class="font-color-w">{{website.website_name}}</span>
       </div>
-      
+
       <Menu-item name="/">
         <Icon type="home"></Icon>
         {{$t('m.Home')}}
@@ -35,18 +35,7 @@
           {{$t('m.OI_Rank')}}
         </Menu-item>
       </Submenu>
-      <Submenu name="about">
-        <template slot="title">
-          <Icon type="information-circled"></Icon>
-          {{$t('m.About')}}
-        </template>
-        <Menu-item name="/about">
-          {{$t('m.Judger')}}
-        </Menu-item>
-        <Menu-item name="/FAQ">
-          {{$t('m.FAQ')}}
-        </Menu-item>
-      </Submenu>
+
       <Submenu name="Service">
         <template slot="title">
           <Icon type="ios-photos-outline"></Icon>
@@ -61,6 +50,10 @@
           MinIO
         </Menu-item>
       </Submenu>
+      <Menu-item name="/about">
+        <Icon type="information-circled"></Icon>
+        {{$t('m.About')}}
+      </Menu-item>
       <template v-if="!isAuthenticated">
         <div class="btn-menu">
           <Button type="primary"
@@ -78,7 +71,7 @@
       </template>
       <template v-else>
         <Dropdown class="drop-menu" @on-click="handleRoute" placement="bottom-end" trigger="hover" >
-          <Button type="text" class="drop-menu-title">	
+          <Button type="text" class="drop-menu-title">
           <div class="avatar-container">
             <img class="avatar" :src="profile.avatar"/>
           </div>
@@ -92,7 +85,7 @@
                 <span> {{ user.email }}</span>
               </div>
             </div>
-                      
+
             </Dropdown-item>
             <Dropdown-item divided name="/user-home">{{$t('m.MyHome')}}</Dropdown-item>
             <Dropdown-item name="/status?myself=1">{{$t('m.MySubmissions')}}</Dropdown-item>
@@ -233,5 +226,5 @@
     color: white;
   }
 
-  
+
 </style>
