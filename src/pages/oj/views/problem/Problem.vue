@@ -3,7 +3,19 @@
     <div id="problem-main">
       <!--problem main-->
       <Panel :padding="40" shadow>
-        <div slot="title">{{problem.title}}</div>
+        <div slot="title">
+          {{problem.title}}
+          <div>
+            <p class="limit-info">
+            <Icon type="android-time"></Icon>
+            {{$t('m.Time_Limit')}} C/C++:{{problem.time_limit}}MS / Others:{{problem.time_limit*2}}MS
+            </p>
+            <p class="limit-info">
+            <Icon type="ios-analytics"></Icon>
+            {{$t('m.Memory_Limit')}} {{problem.memory_limit}}MB
+            </p>
+          </div>
+        </div>
         <div id="problem-content" class="markdown-body" v-katex>
           <p class="title">{{$t('m.Description')}}</p>
           <p class="content" v-html=problem.description></p>
@@ -60,20 +72,20 @@
         <Row type="flex" justify="space-between">
           <Col :span="10">
             <div class="status" v-if="statusVisible">
-              <template v-if="!this.contestID || (this.contestID && OIContestRealTimePermission)">
+              <template v-if="!this.contestID || (this.contestID && (contestRuleType === 'ACM' || ContestRealTimePermission))">
                 <span>{{$t('m.Status')}}</span>
                 <Tag type="dot" :color="submissionStatus.color" @click.native="handleRoute('/status/'+submissionId)">
                   {{$t('m.' + submissionStatus.text.replace(/ /g, "_"))}}
                 </Tag>
               </template>
-              <template v-else-if="this.contestID && !OIContestRealTimePermission">
+              <template v-else-if="this.contestID && contestRuleType === 'OI' && !ContestRealTimePermission">
                 <Alert type="success" show-icon>{{$t('m.Submitted_successfully')}}</Alert>
               </template>
             </div>
             <div v-else-if="problem.my_status === 0">
               <Alert type="success" show-icon>{{$t('m.You_have_solved_the_problem')}}</Alert>
             </div>
-            <div v-else-if="this.contestID && !OIContestRealTimePermission && submissionExists">
+            <div v-else-if="this.contestID && contestRuleType === 'OI' && !ContestRealTimePermission && submissionExists">
               <Alert type="success" show-icon>{{$t('m.You_have_submitted_a_solution')}}</Alert>
             </div>
             <div v-if="contestEnded">
@@ -115,13 +127,13 @@
           </VerticalMenu-item>
         </template>
 
-        <VerticalMenu-item v-if="!this.contestID || OIContestRealTimePermission" :route="submissionRoute">
+        <VerticalMenu-item v-if="!this.contestID || contestRuleType === 'ACM' || ContestRealTimePermission" :route="submissionRoute">
           <Icon type="navicon-round"></Icon>
            {{$t('m.Submissions')}}
         </VerticalMenu-item>
 
         <template v-if="this.contestID">
-          <VerticalMenu-item v-if="!this.contestID || OIContestRealTimePermission"
+          <VerticalMenu-item v-if="!this.contestID || contestRuleType === 'ACM' || ContestRealTimePermission"
                              :route="{name: 'contest-rank', params: {contestID: contestID}}">
             <Icon type="stats-bars"></Icon>
             {{$t('m.Rankings')}}
@@ -147,7 +159,6 @@
           <li>
             <p>{{$t('m.Memory_Limit')}}</p>
             <p>{{problem.memory_limit}}MB</p></li>
-          <li>
           <li>
             <p>{{$t('m.IOMode')}}</p>
             <p>{{problem.io_mode.io_mode}}</p>
@@ -176,7 +187,7 @@
         </ul>
       </Card>
 
-      <Card id="pieChart" :padding="0" v-if="!this.contestID || OIContestRealTimePermission">
+      <Card id="pieChart" :padding="0" v-if="!this.contestID || ContestRealTimePermission">
         <div slot="title">
           <Icon type="ios-analytics"></Icon>
           <span class="card-title">{{$t('m.Statistic')}}</span>
@@ -209,7 +220,7 @@
   import api from '@oj/api'
   import {pie, largePie} from './chartData'
   import returnCitySN from 'returnCitySN'
-  import usPaser from 'ua-parser-js'
+  import uaParser from 'ua-parser-js'
 
   // 只显示这些状态的图形占用
   const filtedStatus = ['-1', '-2', '0', '1', '2', '3', '4', '8']
@@ -429,18 +440,22 @@
         this.result = {result: 9}
         this.submitting = true
 
-        let extraInfo = ''
-        if (this.language.indexOf('Python') === -1) {
-          extraInfo += '\n\n// submitted extra informations:'
-          extraInfo += '\n// ip: ' + returnCitySN['cip']
-          const ua = usPaser(navigator.userAgent)
-          extraInfo += '\n// system: ' + ua.os.name + '/' + ua.os.version
-          extraInfo += '\n// browser: ' + ua.browser.name + '/' + ua.browser.version
+        let externInfo = ''
+        if (this.language.indexOf('Python2') === -1) {
+          var commentMark = '##'
+          if (this.language.indexOf('Python3') === -1) {
+            commentMark = '//'
+          }
+          externInfo += '\n\n' + commentMark + ' submitted extra informations:'
+          externInfo += '\n' + commentMark + ' ip: ' + returnCitySN['cip']
+          const ua = uaParser(navigator.userAgent)
+          externInfo += '\n' + commentMark + ' system: ' + ua.os.name + '/' + ua.os.version
+          externInfo += '\n' + commentMark + ' browser: ' + ua.browser.name + '/' + ua.browser.version
         }
         let data = {
           problem_id: this.problem.id,
           language: this.language,
-          code: this.code + extraInfo,
+          code: this.code + externInfo,
           contest_id: this.contestID
         }
         if (this.captchaRequired) {
@@ -473,7 +488,7 @@
           })
         }
 
-        if (this.contestRuleType === 'OI' && !this.OIContestRealTimePermission) {
+        if (this.contestRuleType === 'OI' && !this.ContestRealTimePermission) {
           if (this.submissionExists) {
             this.$Modal.confirm({
               title: '',
@@ -503,7 +518,7 @@
       }
     },
     computed: {
-      ...mapGetters(['problemSubmitDisabled', 'contestRuleType', 'OIContestRealTimePermission', 'contestStatus']),
+      ...mapGetters(['problemSubmitDisabled', 'contestRuleType', 'ContestRealTimePermission', 'contestStatus']),
       contest () {
         return this.$store.state.contest.contest
       },
@@ -555,12 +570,19 @@
     }
   }
 
+  .limit-info {
+    font-size: 15px;
+    font-weight: 400;
+    color: #58595a;
+    margin: 10px 0 -5px 10px;
+  }
+
   #problem-content {
-    margin-top: -50px;
+    margin-top: -60px;
     .title {
       font-size: 20px;
       font-weight: 400;
-      margin: 25px 0 8px 0;
+      margin: 25px 0 10px 0;
       color: #3091f2;
       .copy {
         padding-left: 8px;

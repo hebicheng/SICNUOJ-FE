@@ -37,7 +37,7 @@
         </el-row>
         <el-row :gutter="20">
           <el-col :span="8">
-            <el-form-item :label="$t('m.Time_Limit') + ' (ms)' " required>
+            <el-form-item :label="$t('m.Time_Limit') + ' (ms)  ( C/C++之外的语言默认两倍限时 )' " required>
               <el-input type="Number" :placeholder="$t('m.Time_Limit')" v-model="problem.time_limit"></el-input>
             </el-form-item>
           </el-col>

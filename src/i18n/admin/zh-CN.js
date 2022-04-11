@@ -73,7 +73,7 @@ export const m = {
   Input_Samples: '输入样例',
   Output_Samples: '输出样例',
   Add_Sample: '添加样例',
-  Code_Template: '代码模板',
+  Code_Template: '代码模板 (直接填答案的填空题仅可使用Python2)',
   Special_Judge: 'Special Judge',
   Use_Special_Judge: '使用 Special Judge',
   Special_Judge_Code: 'Special Judge 代码',

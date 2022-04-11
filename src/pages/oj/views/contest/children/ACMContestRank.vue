@@ -251,7 +251,6 @@
             dataRank[i][problemID] = info[problemID]
             dataRank[i][problemID].ac_time = time.secondFormat(dataRank[i][problemID].ac_time)
             let status = info[problemID]
-            console.log(info[problemID])
             if (status.is_first_ac) {
               cellClass[problemID] = 'first-ac'
             } else if (status.is_ac) {

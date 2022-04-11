@@ -2,7 +2,7 @@
   <div>
     <Panel>
       <div slot="title">{{$t('m.Problems_List')}}</div>
-      <Table v-if="contestRuleType == 'ACM' || OIContestRealTimePermission"
+      <Table v-if="ContestRealTimePermission"
              :columns="ACMTableColumns"
              :data="problems"
              @on-row-click="goContestProblem"
@@ -11,7 +11,7 @@
              :data="problems"
              :columns="OITableColumns"
              @on-row-click="goContestProblem"
-             no-data-text="$t('m.No_Problems')"></Table>
+             :no-data-text="$t('m.No_Problems')"></Table>
     </Panel>
   </div>
 </template>
@@ -67,10 +67,12 @@
       getContestProblems () {
         this.$store.dispatch('getContestProblems').then(res => {
           if (this.isAuthenticated) {
-            if (this.contestRuleType === 'ACM') {
+            if (this.ContestRealTimePermission) {
               this.addStatusColumn(this.ACMTableColumns, res.data.data)
-            } else if (this.OIContestRealTimePermission) {
-              this.addStatusColumn(this.ACMTableColumns, res.data.data)
+            } else {
+              if (this.contestRuleType === 'ACM') {
+                this.addStatusColumn(this.OITableColumns, res.data.data)
+              }
             }
           }
         })
@@ -89,7 +91,7 @@
       ...mapState({
         problems: state => state.contest.contestProblems
       }),
-      ...mapGetters(['isAuthenticated', 'contestRuleType', 'OIContestRealTimePermission'])
+      ...mapGetters(['isAuthenticated', 'contestRuleType', 'ContestRealTimePermission'])
     }
   }
 </script>

@@ -73,7 +73,7 @@ export const m = {
   Input_Samples: 'Input Samples',
   Output_Samples: 'Output Samples',
   Add_Sample: 'Add Sample',
-  Code_Template: 'Code_Template',
+  Code_Template: 'Code Template (Fill-in-the-blank questions are only available in Python2)',
   Special_Judge: 'Special Judge',
   Use_Special_Judge: 'Use Special Judge',
   Special_Judge_Code: 'Special Judge Code',

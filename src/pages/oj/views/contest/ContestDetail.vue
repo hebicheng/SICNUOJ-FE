@@ -51,14 +51,14 @@
           {{$t('m.Problems')}}
         </VerticalMenu-item>
 
-        <VerticalMenu-item v-if="OIContestRealTimePermission"
+        <VerticalMenu-item v-if="contestRuleType == 'ACM' || ContestRealTimePermission"
                            :disabled="contestMenuDisabled"
                            :route="{name: 'contest-submission-list'}">
           <Icon type="navicon-round"></Icon>
           {{$t('m.Submissions')}}
         </VerticalMenu-item>
 
-        <VerticalMenu-item v-if="OIContestRealTimePermission"
+        <VerticalMenu-item v-if="contestRuleType == 'ACM' || ContestRealTimePermission"
                            :disabled="contestMenuDisabled"
                            :route="{name: 'contest-rank', params: {contestID: contestID}}">
           <Icon type="stats-bars"></Icon>
@@ -170,7 +170,7 @@
       }),
       ...mapGetters(
         ['contestMenuDisabled', 'contestRuleType', 'contestStatus', 'countdown', 'isContestAdmin',
-          'OIContestRealTimePermission', 'passwordFormVisible']
+          'ContestRealTimePermission', 'passwordFormVisible']
       ),
       countdownColor () {
         if (this.contestStatus) {
