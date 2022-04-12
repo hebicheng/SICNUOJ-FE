@@ -168,6 +168,7 @@
       }
     },
     mounted () {
+      this.$store.dispatch('getContest').then(res => {})
       this.contestID = this.$route.params.contestID
       this.getContestRankData(1)
       if (this.contestProblems.length === 0) {

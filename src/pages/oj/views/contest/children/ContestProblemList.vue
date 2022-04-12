@@ -61,6 +61,7 @@
       }
     },
     mounted () {
+      this.$store.dispatch('getContest').then(res => {})
       this.getContestProblems()
     },
     methods: {

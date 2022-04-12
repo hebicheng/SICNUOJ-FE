@@ -103,7 +103,7 @@ export const m = {
   Java_specifications_answer_part_2: '类的静态 main 方法开始。不要使用公共类：即使',
   Java_specifications_answer_part_3: '也必须是非公共类以避免编译错误使用缓冲I / O以避免由于过度刷新而导致超出时间限制',
   About_presentation_error: '关于输出格式错误？',
-  About_presentation_error_answer_part_1: '该 OJ 中没有输出格式错误。Judger将对自动对输出修整然后包裹在输出的',
+  About_presentation_error_answer_part_1: '本 OJ 中没有输出格式错误。Judger将自动整理输出，去除输出的最后一行的空白字符',
   last: '最后',
   About_presentation_error_answer_part_2: '一行中。如果仍然与正确的输出不同，则结果将是',
   How_to_report_bugs: '如何报告有关此 OJ 的错误？',

@@ -117,7 +117,7 @@ export const m = {
   Java_specifications_answer_part_2: '類別的靜態main方法開始執行。不要使用public類別：即使',
   Java_specifications_answer_part_3: '也必須是非public類別以避免編譯錯誤使用緩衝I/O以避免過度重載而導致超出時間限制',
   About_presentation_error: '關於輸出格式錯誤?',
-  About_presentation_error_answer_part_1: '此OJ中沒有輸出格式錯誤。Judge系統將自動整理輸出然後包裹在輸出的',
+  About_presentation_error_answer_part_1: '此OJ中沒有輸出格式錯誤。Judge系統將自動整理輸出,去除輸出的最后一行的空白字符',
   last: '最後',
   About_presentation_error_answer_part_2: '一行中。如果仍然與正確的輸出不同，則結果將是',
   How_to_report_bugs: '如何回報關於此OJ的錯誤?',

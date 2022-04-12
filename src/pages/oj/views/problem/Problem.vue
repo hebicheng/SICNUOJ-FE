@@ -283,6 +283,9 @@
         this.$Loading.start()
         this.contestID = this.$route.params.contestID
         this.problemID = this.$route.params.problemID
+        if (this.contestID) {
+          this.$store.dispatch('getContest').then(res => {})
+        }
         let func = this.$route.name === 'problem-details' ? 'getProblem' : 'getContestProblem'
         api[func](this.problemID, this.contestID).then(res => {
           this.$Loading.finish()

@@ -63,6 +63,7 @@
     methods: {
       init () {
         if (this.isContest) {
+          this.$store.dispatch('getContest').then(res => {})
           this.getContestAnnouncementList()
         } else {
           this.getAnnouncementList()
